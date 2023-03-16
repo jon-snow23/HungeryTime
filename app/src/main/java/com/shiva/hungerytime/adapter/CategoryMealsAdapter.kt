@@ -22,6 +22,7 @@ class CategoryMealsAdapter: RecyclerView.Adapter<CategoryMealsAdapter.CategoryMe
                 LayoutInflater.from(parent.context)
             )
         )
+        //ram
     }
 
     override fun getItemCount(): Int {

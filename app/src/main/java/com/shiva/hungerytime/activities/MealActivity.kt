@@ -51,11 +51,10 @@ class MealActivity : AppCompatActivity() {
         mealMvvm.observeMealDetailLivedata().observe(this , object :Observer<Meal>{
             override fun onChanged(t: Meal) {
                 onResponseCase()
-                val meal = t
-                binding.tvCategoryInfo.text = "Category : ${meal!!.strCategory}"
-                binding.tvAreaInfo.text = "Area : ${meal!!.strArea}"
-                binding.tvInstructions.text = meal.strInstructions
-                youtubeLink = meal.strYoutube
+                binding.tvCategoryInfo.text = "Category : ${t!!.strCategory}"
+                binding.tvAreaInfo.text = "Area : ${t!!.strArea}"
+                binding.tvInstructions.text = t.strInstructions
+                youtubeLink = t.strYoutube
             }
 
         })
