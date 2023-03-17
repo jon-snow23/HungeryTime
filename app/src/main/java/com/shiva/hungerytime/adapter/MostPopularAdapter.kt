@@ -8,8 +8,10 @@ import com.shiva.hungerytime.databinding.PopularItemBinding
 import com.shiva.hungerytime.pojo.MealsByCategory
 
 class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>(){
-    lateinit var OnItemClick:((MealsByCategory) -> Unit)
+    lateinit var onItemClick:((MealsByCategory) -> Unit)
+    var onLongItemClick:((MealsByCategory)-> Unit)?=null
     private var mealList = ArrayList<MealsByCategory>()
+
 
 
     fun setMeals(mealsList:ArrayList<MealsByCategory>){
@@ -31,7 +33,11 @@ class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.PopularMealVi
             .into(holder.binding.imgPopularMeal)
 
         holder.itemView.setOnClickListener {
-            OnItemClick.invoke(mealList[position])
+            onItemClick.invoke(mealList[position])
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongItemClick?.invoke(mealList[position])
+            true
         }
     }
 

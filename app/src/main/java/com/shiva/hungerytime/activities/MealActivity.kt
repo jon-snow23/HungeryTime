@@ -5,14 +5,17 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.shiva.hungerytime.R
+import com.shiva.hungerytime.database.MealDatabase
 import com.shiva.hungerytime.databinding.ActivityMealBinding
 import com.shiva.hungerytime.fragment.HomeFragment
 import com.shiva.hungerytime.pojo.Meal
 import com.shiva.hungerytime.viewModel.MealViewModel
+import com.shiva.hungerytime.viewModel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealId:String
@@ -27,7 +30,14 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mealMvvm = ViewModelProvider(this)[MealViewModel::class.java]
+
+
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        mealMvvm = ViewModelProvider(this , viewModelFactory)[MealViewModel::class.java]
+//        mealMvvm = ViewModelProvider(this)[MealViewModel::class.java]
+
+
 
         getMealInformationFromIntent()
 
@@ -38,6 +48,18 @@ class MealActivity : AppCompatActivity() {
         onYoutubeImgClick()
 
 
+        onFavoriteClick()
+
+
+    }
+
+    private fun onFavoriteClick() {
+        binding.btnSave.setOnClickListener {
+            mealToSave?.let {
+                mealMvvm.insertMeal(it)
+                Toast.makeText(this , "Meal id added to Favorite" , Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onYoutubeImgClick() {
@@ -46,17 +68,19 @@ class MealActivity : AppCompatActivity() {
                  startActivity(intent)
              }
     }
+    private var mealToSave :Meal?=null
 
     private fun observeMealDetailsLivedata() {
         mealMvvm.observeMealDetailLivedata().observe(this , object :Observer<Meal>{
             override fun onChanged(t: Meal) {
                 onResponseCase()
+
+                mealToSave = t
                 binding.tvCategoryInfo.text = "Category : ${t!!.strCategory}"
                 binding.tvAreaInfo.text = "Area : ${t!!.strArea}"
                 binding.tvInstructions.text = t.strInstructions
                 youtubeLink = t.strYoutube
             }
-
         })
     }
 
