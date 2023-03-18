@@ -16,13 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/search_box_background"
-        android:paddingLeft="15dp"
+        android:background="@drawable/bottom_sheet_dialog_shape"
+        android:paddingStart="15dp"
         android:hint="Type meal name ..."
         android:textSize="16sp"
         android:inputType="text"
-        android:maxLines="1"
-        android:importantForAutofill="no" />
+        android:maxLines="1" />
 
     <ImageView
         android:id="@+id/ic_search"

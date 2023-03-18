@@ -20,6 +20,7 @@ class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var favoritesAdapter:MealAdapter
+    var itemCount : Int?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +39,8 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prepareRecyclerView()
-        observeFavroites()
+        observeFavorites()
+
 
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -71,12 +73,16 @@ class FavoriteFragment : Fragment() {
         binding.favRecView.apply {
             layoutManager = GridLayoutManager(context , 2 , GridLayoutManager.VERTICAL , false)
             adapter = favoritesAdapter
+            if (itemCount==null) {
+                binding.tvFavEmpty.visibility = View.VISIBLE
+            }
         }
     }
 
-    private fun observeFavroites() {
+    private fun observeFavorites() {
         viewModel.observeFavoriteMealsLiveData().observe(viewLifecycleOwner, Observer { meals->
             favoritesAdapter.differ.submitList(meals)
+           itemCount =  favoritesAdapter.itemCount
         })
     }
 }

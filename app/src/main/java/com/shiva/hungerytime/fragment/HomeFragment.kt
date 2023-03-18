@@ -131,7 +131,6 @@ class HomeFragment : Fragment() {
             intent.putExtra(MEAL_NAME , meal.strMeal)
             intent.putExtra(MEAL_THUMB , meal.strMealThumb)
             startActivity(intent)
-
         }
     }
 

@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HungeryTime" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.HungryTime" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/accent</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">#804C57</item>
+        <item name="colorPrimaryVariant">#4F586E</item>
+        <item name="colorOnPrimary">@color/g_black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -31,4 +31,5 @@
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottom_sheet_dialog_shape</item>
     </style>
+
 </resources>

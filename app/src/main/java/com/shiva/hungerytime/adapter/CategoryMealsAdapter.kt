@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shiva.hungerytime.databinding.MealItemBinding
+import com.shiva.hungerytime.pojo.Category
+import com.shiva.hungerytime.pojo.CategoryList
 import com.shiva.hungerytime.pojo.MealsByCategory
 
 class CategoryMealsAdapter: RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewModel>() {
@@ -22,7 +24,6 @@ class CategoryMealsAdapter: RecyclerView.Adapter<CategoryMealsAdapter.CategoryMe
                 LayoutInflater.from(parent.context)
             )
         )
-        //ram
     }
 
     override fun getItemCount(): Int {
